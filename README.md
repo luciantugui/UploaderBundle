@@ -13,11 +13,14 @@ The bundle is based on [jQuery File Upload](https://github.com/blueimp/jQuery-Fi
 *
 
 ## Installation
+1. Install Uploader Bundle using [Composer](https://getcomposer.org)
 
-Using [Composer](https://getcomposer.org):
+### Step1: Install Uploader Bundle using [Composer](https://getcomposer.org)
 ``` bash
 composer require luciantugui/uploader-bundle:dev-master
 ```
+
+## Usage
 
 ## TODO
 * composer dependencies, doctrine bundle 1.3, symfony framework, twig
