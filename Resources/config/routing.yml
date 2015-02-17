@@ -1,0 +1,3 @@
+gus_uploader_bundle:
+    pattern:  /uploader
+    defaults: { _controller: GusUploaderBundle:Uploader:index }

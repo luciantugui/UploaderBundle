@@ -1,0 +1,84 @@
+{#UPLOADER PACKAGES#}
+
+    {% stylesheets
+    '../vendor/twitter/bootstrap/dist/css/bootstrap.css'
+    '../vendor/blueimp/jquery-file-upload/css/jquery.fileupload.css'
+    '../vendor/blueimp/jquery-file-upload/css/jquery.fileupload-ui.css'
+    '../vendor/blueimp/gallery/css/blueimp-gallery.min.css'
+    output='css/compiled/uploader.css' %}
+<link rel="stylesheet" href="{{ asset_url }}"/>
+{% endstylesheets %}
+
+    {% stylesheets
+    output='css/compiled/bootstrap.css.map'
+    '../vendor/twitter/bootstrap/dist/css/bootstrap.css.map' %}{% endstylesheets %}
+
+<noscript>
+    <link rel="stylesheet" href="../vendor/blueimp/jquery-file-upload/css/jquery.fileupload-noscript.css">
+</noscript>
+<noscript>
+    <link rel="stylesheet" href="../vendor/blueimp/jquery-file-upload/css/jquery.fileupload-ui-noscript.css">
+</noscript>
+
+{% stylesheets
+output='css/img/play-pause.svg'
+'../vendor/blueimp/gallery/img/play-pause.svg' %}{% endstylesheets %}
+
+    {% stylesheets
+    output='css/img/error.svg'
+    '../vendor/blueimp/gallery/img/error.svg' %}{% endstylesheets %}
+
+    {% stylesheets
+    output='css/img/video-play.svg'
+    '../vendor/blueimp/gallery/img/video-play.svg' %}{% endstylesheets %}
+
+    {% stylesheets
+    output='css/fonts/glyphicons-halflings-regular.ttf'
+    '../vendor/twitter/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf' %}{% endstylesheets %}
+
+    {% stylesheets
+    output='css/fonts/glyphicons-halflings-regular.woff'
+    '../vendor/twitter/bootstrap/dist/fonts/glyphicons-halflings-regular.woff' %}{% endstylesheets %}
+
+    {% stylesheets
+    output='css/img/loading.gif'
+    '../vendor/blueimp/jquery-file-upload/img/loading.gif' %}{% endstylesheets %}
+
+    {% stylesheets
+    output='css/img/progressbar.gif'
+    '../vendor/blueimp/jquery-file-upload/img/progressbar.gif' %}{% endstylesheets %}
+
+    {% javascripts
+    '../vendor/frameworks/jquery/jquery.min.js'
+    '../vendor/twitter/bootstrap/dist/js/bootstrap.min.js'
+    '../vendor/blueimp/jquery-file-upload/js/vendor/jquery.ui.widget.js'
+    '../vendor/blueimp/javascript-templates/js/tmpl.min.js'
+    '../vendor/blueimp/javascript-load-image/js/load-image.all.min.js'
+    '../vendor/blueimp/javascript-canvas-to-blob/js/canvas-to-blob.min.js'
+    '../vendor/blueimp/gallery/js/jquery.blueimp-gallery.min.js'
+    '../vendor/blueimp/jquery-file-upload/js/jquery.iframe-transport.js'
+    '../vendor/blueimp/jquery-file-upload/js/jquery.fileupload.js'
+    '../vendor/blueimp/jquery-file-upload/js/jquery.fileupload-process.js'
+    '../vendor/blueimp/jquery-file-upload/js/jquery.fileupload-image.js'
+    '../vendor/blueimp/jquery-file-upload/js/jquery.fileupload-audio.js'
+    '../vendor/blueimp/jquery-file-upload/js/jquery.fileupload-video.js'
+    '../vendor/blueimp/jquery-file-upload/js/jquery.fileupload-validate.js'
+    '../vendor/blueimp/jquery-file-upload/js/jquery.fileupload-ui.js'
+    output='js/compiled/uploader.js' %}
+<script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+
+<!--[if (gte IE 8)&(lt IE 10)]>
+{% javascripts
+'../vendor/blueimp/jquery-file-upload/js/cors/jquery.xdr-transport.js'
+output='js/compiled/jquery.xdr-transport.js' %}
+<script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+<![endif]-->
+
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+{#UPLOADER PACKAGES#}

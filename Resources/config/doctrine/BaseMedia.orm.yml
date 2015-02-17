@@ -1,0 +1,32 @@
+Gus\UploaderBundle\Entity\BaseMedia:
+    type: mappedSuperclass
+    entityListeners:
+        Gus\UploaderBundle\EventListener\UploaderListener:
+            postPersist: [postPersistHandler]
+            prePersist: [prePersistHandler]
+            postRemove: [postRemoveHandler]
+    fields:
+        path:
+            type: string
+        name:
+            type: string
+            nullable: false
+            length: 50
+            fixed: false
+            comment: ''
+        mimeType:
+            type: string
+            nullable: false
+            length: 50
+            fixed: false
+            comment: ''
+        size:
+            type: decimal
+            nullable: false
+            comment: ''
+        description:
+            type: string
+            nullable: true
+            length: 50
+            fixed: false
+            comment: ''

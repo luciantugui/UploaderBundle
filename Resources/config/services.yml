@@ -1,0 +1,27 @@
+services:
+    gus_uploader.form.type.uploader:
+        class: Gus\UploaderBundle\Form\Type\UploaderType
+        tags:
+           - { name: form.type, alias: gus_uploader }
+    gus_uploader.form.type.media:
+        class: Gus\UploaderBundle\Form\Type\MediaType
+        arguments:
+                - "%gus_uploader.media_class%"
+                - "%gus_uploader.settings.upload_dir%"
+                - "%gus_uploader.settings.image_versions%"
+        tags:
+           - { name: form.type, alias: gus_uploader_media }
+    app.twig_extension:
+        class: Gus\UploaderBundle\Twig\AppExtension
+        public: false
+        arguments:
+                - "%gus_uploader.uploads_dir%"
+        tags:
+            - { name: twig.extension }
+    uploader_listener:
+        class: Gus\UploaderBundle\EventListener\UploaderListener
+        arguments:
+          - "%gus_uploader.uploads_dir%"
+          - "%gus_uploader.settings.image_versions%"
+        tags:
+            - { name: doctrine.orm.entity_listener }

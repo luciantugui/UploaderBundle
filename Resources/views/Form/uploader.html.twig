@@ -1,0 +1,103 @@
+{% block gus_uploader_widget %}
+    <div id="fileupload">
+        <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+        <div class="row fileupload-buttonbar">
+            <div class="col-lg-7">
+                <!-- The fileinput-button span is used to style the file input field as button -->
+                <span class="btn btn-sm btn-success fileinput-button">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    <span>Add files...</span>
+                    <input type="file" name="files[]" multiple>
+                </span>
+                {#add this back if you set autoUpload to false#}
+{#
+                <button type="submit" class="btn btn-sm btn-primary start">
+                    <i class="glyphicon glyphicon-upload"></i>
+                    <span>Start upload</span>
+                </button>
+#}
+                <button type="reset" class="btn btn-sm btn-warning cancel">
+                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <span>Cancel upload</span>
+                </button>
+                <button type="button" class="btn btn-sm btn-danger delete">
+                    <i class="glyphicon glyphicon-trash"></i>
+                    <span>Delete</span>
+                </button>
+                <input type="checkbox" class="toggle">
+                <!-- The global file processing state -->
+                <span class="fileupload-process"></span>
+            </div>
+            <!-- The global progress state -->
+            <div class="col-lg-5 fileupload-progress fade">
+                <!-- The global progress bar -->
+                <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar progress-bar-success" style="width:0%;"></div>
+                </div>
+                <!-- The extended global progress state -->
+                <div class="progress-extended">&nbsp;</div>
+            </div>
+        </div>
+        <!-- The table listing the files available for upload/download -->
+        <table id="uploadsTemplate" role="presentation" class="table table-striped">
+            <tbody class="files"></tbody>
+        </table>
+    </div>
+    <br>
+    <!-- The blueimp Gallery widget -->
+    <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" data-filter=":even">
+        <div class="slides"></div>
+        <h3 class="title"></h3>
+        <a class="prev">‹</a>
+        <a class="next">›</a>
+        <a class="close">×</a>
+        <a class="play-pause"></a>
+        <ol class="indicator"></ol>
+    </div>
+    {% include 'GusUploaderBundle:Uploader:template-download.html.twig' %}
+    {% include 'GusUploaderBundle:Uploader:template-upload.html.twig' %}
+    <script type="text/javascript">
+        /* global $, window */
+        $(function () {
+            'use strict';
+
+            // Initialize the jQuery File Upload widget:
+            $('#fileupload').fileupload({
+                // Uncomment the following to send cross-domain cookies:
+                //xhrFields: {withCredentials: true},
+                url: '{{ path('gus_uploader_bundle') }}',
+                paramName: 'files[]',
+                autoUpload: true
+//                maxNumberOfFiles: 1
+            });
+            $('#fileupload').fileupload(
+                    'option',
+                    'redirect',
+                    window.location.href.replace(
+                            /\/[^\/]*$/,
+                            '/cors/result.html?%s'
+                    )
+            );
+            //when deleting a file, remove hidden elements painted by symfony form,
+            // so that when submitting media entity will be removed
+            $('#fileupload').bind('fileuploaddestroy', function (e, data) {
+               $('#'+data.id).parent().remove();
+            });
+            // Load existing files:
+            $('#fileupload').addClass('fileupload-processing');
+            $.ajax({
+                // Uncomment the following to send cross-domain cookies:
+                //xhrFields: {withCredentials: true},
+                url: $('#fileupload').fileupload('option', 'url'),
+                dataType: 'json',
+                context: $('#fileupload')[0]
+            }).always(function () {
+                $(this).removeClass('fileupload-processing');
+            }).done(function (result) {
+                $(this).fileupload('option', 'done').call(this, $.Event('done'), {result: result});
+                //paint files already existent for the entity
+                $(this).fileupload('option', 'done').call(this, $.Event('done'), {result: filesServer});
+            });
+        });
+    </script>
+{% endblock %}
