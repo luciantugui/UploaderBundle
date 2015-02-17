@@ -23,7 +23,7 @@ composer require luciantugui/uploader-bundle:dev-master
 ```
 Uploader Bundle will be installed in `vendor/luciantugui` directory
 
-### Step2: Enable UploaderBundle in AppKernel.php
+### Step2: Enable UploaderBundle in `AppKernel.php`
 ``` php
 $bundles = array(
     // ...
