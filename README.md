@@ -20,10 +20,8 @@ composer require luciantugui/uploader-bundle:dev-master
 ```
 
 ## TODO
-* add composer dependencies, doctrine bundle 1.3, symfony framework, twig
+* composer dependencies, doctrine bundle 1.3, symfony framework, twig
 * tests
 
 ## License
 Released under the [MIT license](http://opensource.org/licenses/MIT).
-
-    LICENSE
