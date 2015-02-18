@@ -96,7 +96,7 @@ configuring custom [composer package repositories](https://getcomposer.org/doc/0
      }
  ]
  ```
- Add the previous package to the require section in `composer.json`:
+ Add previous packages to the require section in `composer.json`:
  ``` json
  "require": {
      "blueimp/jquery-file-upload": "dev-master",
@@ -208,6 +208,7 @@ class Media extends BaseMedia
 [composer package repositories](https://getcomposer.org/doc/05-repositories.md#package-2)
  to [composer vcs repositories](https://getcomposer.org/doc/05-repositories.md#vcs),
 for this all blueimp libraries needed must be forked, so that a composer.json can be added
+
 > **Note**: This repository type has a few limitations and should be avoided whenever possible:
   Composer will not update the package unless you change the version field.
   Composer will not update the commit references,
