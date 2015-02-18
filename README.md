@@ -18,6 +18,7 @@ The bundle is based on [jQuery File Upload](https://github.com/blueimp/jQuery-Fi
 3. configure bundle in `app/config/config.yml`
 4. enable bundle in `app/AppKernel.php`
 5. create `Media` entity class
+6. include static content
 
 ### Step 1: Install Uploader Bundle using [Composer](https://getcomposer.org)
 ``` bash
@@ -107,11 +108,11 @@ configuring custom [composer package repositories](https://getcomposer.org/doc/0
 }
  ```
 
-### Step 3: configure UploadBundle in `config.yml`
+### Step 3: Configure UploadBundle in `config.yml`
 ``` yml
 # app/config/config.yml
 gus_uploader:
-    media_class: Bike\ProductBundle\Entity\Media
+    media_class: AppBundle\Entity\Media
     uploads_dir: 'uploaded/'
     settings:
         upload_dir: 'files/'
@@ -158,7 +159,7 @@ $bundles = array(
 );
 ```
 
-### Step 5: create your `Media` class extending `BaseMedia`
+### Step 5: Create your `Media` class extending `BaseMedia`
 `Media` entity class facilitates uploads persistence to the database.
 Having a bundle `/src/AppBundle` and using `yaml` for Doctrine configuration,
 add `Media.orm.yml` entity configuration and `Media.php` class as follows:
@@ -188,6 +189,8 @@ use Gus\UploaderBundle\Entity\BaseMedia;
 
 class Media extends BaseMedia
 {
+    protected $id;
+
     public function __construct()
     {
         parent::__construct();
@@ -195,11 +198,68 @@ class Media extends BaseMedia
 }
 
 ```
-> Note that `Media` class extends `BaseMedia`, the constructor should not be overridden without calling `parent::__construct()`
+> Note that `Media` class extends `BaseMedia`, the constructor should not be overridden without calling `parent::__construct()`,
+and the `id` must be defined as protected
+
+### Step6: Include static content
+All static content needed by the Uploader Bundle is grouped in `Resources/views/assets.html.twig` template.
+Just include it so that's available where the uploader is displayed.
+Having `app/Resources/views/base.html.twig`:
+``` html
+// ...
+{% include "GusUploaderBundle::assets.html.twig" %}
+// ...
+```
 
 ## Usage
-*
+Having a `Post` entity for which uploads are desired and
+the form class `src/AppBundle/Form/PostType.php`,
+add the following two field types to display the uploader in the form:
+``` php
+// src/AppBundle/Form/PostType.php
 
+public function buildForm(FormBuilderInterface $builder, array $options)
+{
+    $builder
+        // ...
+        ->add('uploader', 'gus_uploader', array(
+            'mapped' => false
+        ))
+        ->add('mediaFiles', 'collection', array(
+            'type' => 'gus_uploader_media',
+            'allow_add' => true,
+            'allow_delete' => true,
+            'by_reference' => false,
+            'label' => false,
+            'options' => array(
+                'label' => false
+            )
+        ))
+    ;
+}
+```
+If forms are built in controller directly using `createFormBuilder`:
+``` php
+// src/AppBundle/Controller/PostController.php
+
+$form = $this->createFormBuilder($post)
+    // ...
+    ->add('uploader', 'gus_uploader', array(
+        'mapped' => false
+    ))
+    ->add('mediaFiles', 'collection', array(
+        'type' => 'gus_uploader_media',
+        'allow_add' => true,
+        'allow_delete' => true,
+        'by_reference' => false,
+        'label' => false,
+        'options' => array(
+            'label' => false
+        )
+    ))
+    // ...
+    ->getForm();
+```
 ## TODO
 * composer require, doctrine bundle 1.3, symfony framework, twig
 * tests
