@@ -31,83 +31,83 @@ Uploader Bundle will be installed in `vendor/luciantugui` directory
 Since the bundle is based on [jQuery File Upload](https://github.com/blueimp/jQuery-File-Upload)
 which is not available as a composer package, all dependencies must be installed manually
 configuring custom [composer package repositories](https://getcomposer.org/doc/05-repositories.md#package-2) in `composer.json`:
- ``` json
- "repositories": [
-     {
-         "type": "package",
-         "package": {
-             "name": "blueimp/javascript-templates",
-             "version": "master",
-             "source": {
-                 "url": "https://github.com/blueimp/JavaScript-Templates.git",
-                 "type": "git",
-                 "reference": "master"
-             }
-         }
-     },
-     {
-         "type": "package",
-         "package": {
-             "name": "blueimp/javascript-load-image",
-             "version": "master",
-             "source": {
-                 "url": "https://github.com/blueimp/JavaScript-Load-Image.git",
-                 "type": "git",
-                 "reference": "master"
-             }
-         }
-     },
-     {
-         "type": "package",
-         "package": {
-             "name": "blueimp/javascript-canvas-to-blob",
-             "version": "master",
-             "source": {
-                 "url": "https://github.com/blueimp/JavaScript-Canvas-to-Blob.git",
-                 "type": "git",
-                 "reference": "master"
-             }
-         }
-     },
-     {
-         "type": "package",
-         "package": {
-             "name": "blueimp/gallery",
-             "version": "master",
-             "source": {
-                 "url": "https://github.com/blueimp/Gallery.git",
-                 "type": "git",
-                 "reference": "master"
-             }
-         }
-     },
-     {
-         "type": "package",
-         "package": {
-             "name": "blueimp/jquery-file-upload",
-             "version": "master",
-             "source": {
-                 "url": "https://github.com/blueimp/jQuery-File-Upload.git",
-                 "type": "git",
-                 "reference": "master"
-             },
-             "autoload": {
-                 "classmap": ["server/php/"]
-             }
-         }
-     }
- ]
- ```
+``` json
+"repositories": [
+    {
+        "type": "package",
+        "package": {
+            "name": "blueimp/javascript-templates",
+            "version": "master",
+            "source": {
+                "url": "https://github.com/blueimp/JavaScript-Templates.git",
+                "type": "git",
+                "reference": "master"
+            }
+        }
+    },
+    {
+        "type": "package",
+        "package": {
+            "name": "blueimp/javascript-load-image",
+            "version": "master",
+            "source": {
+                "url": "https://github.com/blueimp/JavaScript-Load-Image.git",
+                "type": "git",
+                "reference": "master"
+            }
+        }
+    },
+    {
+        "type": "package",
+        "package": {
+            "name": "blueimp/javascript-canvas-to-blob",
+            "version": "master",
+            "source": {
+                "url": "https://github.com/blueimp/JavaScript-Canvas-to-Blob.git",
+                "type": "git",
+                "reference": "master"
+            }
+        }
+    },
+    {
+        "type": "package",
+        "package": {
+            "name": "blueimp/gallery",
+            "version": "master",
+            "source": {
+                "url": "https://github.com/blueimp/Gallery.git",
+                "type": "git",
+                "reference": "master"
+            }
+        }
+    },
+    {
+        "type": "package",
+        "package": {
+            "name": "blueimp/jquery-file-upload",
+            "version": "master",
+            "source": {
+                "url": "https://github.com/blueimp/jQuery-File-Upload.git",
+                "type": "git",
+                "reference": "master"
+            },
+            "autoload": {
+                "classmap": ["server/php/"]
+            }
+        }
+    }
+]
+```
  Add previous packages to the require section in `composer.json`:
- ``` json
- "require": {
-     "blueimp/jquery-file-upload": "dev-master",
-     "blueimp/javascript-templates": "dev-master",
-     "blueimp/javascript-load-image": "dev-master",
-     "blueimp/javascript-canvas-to-blob": "dev-master",
-     "blueimp/gallery": "dev-master"
+``` json
+"require": {
+    "blueimp/jquery-file-upload": "dev-master",
+    "blueimp/javascript-templates": "dev-master",
+    "blueimp/javascript-load-image": "dev-master",
+    "blueimp/javascript-canvas-to-blob": "dev-master",
+    "blueimp/gallery": "dev-master"
 }
- ```
+```
 
 ### Step 3: Configure UploadBundle in `config.yml`
 ``` yml
@@ -202,7 +202,7 @@ class Media extends BaseMedia
 > Note that `Media` class extends `BaseMedia`, the constructor should not be overridden without calling `parent::__construct()`,
 and the `id` must be defined as protected
 
-### Step6: Import Uploader Bundle routing
+### Step 6: Import Uploader Bundle routing
 ``` yaml
 # app/config/routing.yml
 gus_uploader:
@@ -210,11 +210,13 @@ gus_uploader:
     prefix:   /
 ```
 
-### Step7: Include static content
-All static content needed by the Uploader Bundle is grouped in `Resources/views/assets.html.twig` template.
+### Step 7: Include static content
+All static content needed by the Uploader Bundle is grouped in `vendor/luciantugui/uploader-bundle/Resources/views/assets.html.twig` template.
 Just include it so that's available where the uploader is displayed.
 Having `app/Resources/views/base.html.twig`:
 ``` html
+{#app/Resources/views/base.html.twig#}
+
 // ...
 {% include "GusUploaderBundle::assets.html.twig" %}
 // ...
@@ -299,6 +301,8 @@ The reason for this is the following note from [composer package repositories](h
 should be removed from bundle static `assets.html.twig`
 * data-prototype is added to uploader theme now, maybe usable
 * manage `.htaccess` and [security](https://github.com/blueimp/jQuery-File-Upload/wiki/Security#php) automatically when uploading files and creating new dirs
+* add possibility to replace upload within a Media entity
+* rename Media to Upload
 
 ## License
 Released under the [MIT license](http://opensource.org/licenses/MIT).
