@@ -227,6 +227,10 @@ add the following two field types to display the uploader in the form:
 ``` php
 // src/AppBundle/Form/PostType.php
 
+// ...
+use Gus\UploaderBundle\Form\Type\UploaderType;
+// ...
+
 public function buildForm(FormBuilderInterface $builder, array $options)
 {
     $builder
@@ -250,6 +254,10 @@ public function buildForm(FormBuilderInterface $builder, array $options)
 If forms are built in controller directly using `createFormBuilder`:
 ``` php
 // src/AppBundle/Controller/PostController.php
+
+// ...
+use Gus\UploaderBundle\Form\Type\UploaderType;
+// ...
 
 $form = $this->createFormBuilder($post)
     // ...
