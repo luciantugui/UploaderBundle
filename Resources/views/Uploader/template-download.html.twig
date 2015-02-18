@@ -1,13 +1,13 @@
 {% verbatim %}
 <!-- The template to display files available for download -->
 <script id="template-download" type="text/x-tmpl">
-    {% for (var i=0, file; file=o.files[i]; i++) { %}
+{% for (var i=0, file; file=o.files[i]; i++) { %}
     <tr class="template-download fade">
         <td>
         {% if (!file.id) { %}
-            <input type="text" name="bike_productbundle_uploader[mediaFiles][{%=file.uniqueId%}][name]" class="hidden" value="{%=file.name%}">
-            <input type="text" name="bike_productbundle_uploader[mediaFiles][{%=file.uniqueId%}][mimeType]" class="hidden" value="{%=file.type%}">
-            <input type="text" name="bike_productbundle_uploader[mediaFiles][{%=file.uniqueId%}][size]" class="hidden" value="{%=file.size%}">
+            <input type="text" name="{% endverbatim %}{{ form.vars.gus_uploader_form_name }}{% verbatim %}[{%=file.uniqueId%}][name]" class="hidden" value="{%=file.name%}">
+            <input type="text" name="{% endverbatim %}{{ form.vars.gus_uploader_form_name }}{% verbatim %}[{%=file.uniqueId%}][mimeType]" class="hidden" value="{%=file.type%}">
+            <input type="text" name="{% endverbatim %}{{ form.vars.gus_uploader_form_name }}{% verbatim %}[{%=file.uniqueId%}][size]" class="hidden" value="{%=file.size%}">
         {% } %}
             <span class="preview">
                 {% if (file.thumbnailUrl) { %}
@@ -32,7 +32,7 @@
         </td>
         <td>
             {% if (file.deleteUrl) { %}
-                <button class="btn btn-sm btn-danger delete" data-type="{%=file.deleteType%}" {% if (file.id) { %} data-id="bike_productbundle_uploader_mediaFiles_{%=i%}_name" {% } %} data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
+                <button class="btn btn-sm btn-danger delete" data-type="{%=file.deleteType%}" {% if (file.id) { %} data-id="{% endverbatim %}{{ form.vars.gus_uploader_form_id }}{% verbatim %}_{%=i%}_name" {% } %} data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
                     <i class="glyphicon glyphicon-trash"></i>
                     <span>Delete</span>
                 </button>

@@ -1,6 +1,7 @@
 services:
     gus_uploader.form.type.uploader:
         class: Gus\UploaderBundle\Form\Type\UploaderType
+        lazy: true
         tags:
            - { name: form.type, alias: gus_uploader }
     gus_uploader.form.type.media:
