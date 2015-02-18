@@ -118,7 +118,8 @@ class Media extends BaseMedia
 ## TODO
 * composer dependencies, doctrine bundle 1.3, symfony framework, twig
 * tests
-* documentation using php annotations (and xml, not only yaml)
+* documentation for doctrine configuration using php annotations (and xml, not only yaml)
+* documentation for php form themes, not only twig
 
 ## License
 Released under the [MIT license](http://opensource.org/licenses/MIT).
