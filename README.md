@@ -113,6 +113,7 @@ class Media extends BaseMedia
 > Note that `Media` class extends `BaseMedia`, the constructor should not be overridden without calling `parent::__construct()`
 
 ## Usage
+*
 
 ## TODO
 * composer dependencies, doctrine bundle 1.3, symfony framework, twig
