@@ -13,7 +13,7 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "frameworks/jquery": "dev-master",
+        "components/jquery": "dev-master",
         "twitter/bootstrap": "3.3.*@dev"
     },
     "autoload": {
