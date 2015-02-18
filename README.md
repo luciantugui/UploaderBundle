@@ -18,7 +18,8 @@ The bundle is based on [jQuery File Upload](https://github.com/blueimp/jQuery-Fi
 3. configure bundle in `app/config/config.yml`
 4. enable bundle in `app/AppKernel.php`
 5. create `Media` entity class
-6. include static content
+6. import bundle routing
+7. include static content
 
 ### Step 1: Install Uploader Bundle using [Composer](https://getcomposer.org)
 ``` bash
@@ -201,7 +202,15 @@ class Media extends BaseMedia
 > Note that `Media` class extends `BaseMedia`, the constructor should not be overridden without calling `parent::__construct()`,
 and the `id` must be defined as protected
 
-### Step6: Include static content
+### Step6: Import Uploader Bundle routing
+``` yaml
+# app/config/routing.yml
+gus_uploader:
+    resource: "@GusUploaderBundle/Resources/config/routing.yml"
+    prefix:   /
+```
+
+### Step7: Include static content
 All static content needed by the Uploader Bundle is grouped in `Resources/views/assets.html.twig` template.
 Just include it so that's available where the uploader is displayed.
 Having `app/Resources/views/base.html.twig`:
@@ -263,7 +272,7 @@ $form = $this->createFormBuilder($post)
 ## TODO
 * composer require, doctrine bundle 1.3, symfony framework, twig
 * tests
-* documentation for doctrine configuration using php annotations (and xml, not only yaml)
+* documentation for doctrine configuration, routing using php annotations (and xml, not only yaml)
 * documentation for php form themes, not only twig
 * migrate composer bundle dependencies from
 [composer package repositories](https://getcomposer.org/doc/05-repositories.md#package-2)
@@ -278,6 +287,7 @@ The reason for this is the following note from [composer package repositories](h
  and will have to deal with an unstable lock file.
 * fix twitter bootstrap dependency, it might have been already included,
 should be removed from bundle static `assets.html.twig`
+* data-prototype is added to uploader theme now, maybe usable
 
 ## License
 Released under the [MIT license](http://opensource.org/licenses/MIT).
