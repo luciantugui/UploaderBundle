@@ -298,6 +298,7 @@ The reason for this is the following note from [composer package repositories](h
 * fix twitter bootstrap dependency, it might have been already included,
 should be removed from bundle static `assets.html.twig`
 * data-prototype is added to uploader theme now, maybe usable
+* manage `.htaccess` and [security](https://github.com/blueimp/jQuery-File-Upload/wiki/Security#php) automatically when uploading files and creating new dirs
 
 ## License
 Released under the [MIT license](http://opensource.org/licenses/MIT).
