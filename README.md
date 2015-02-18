@@ -231,7 +231,7 @@ public function buildForm(FormBuilderInterface $builder, array $options)
 {
     $builder
         // ...
-        ->add('uploader', 'gus_uploader', array(
+        ->add('uploader', new UploaderType('mediaFiles'), array(
             'mapped' => false
         ))
         ->add('mediaFiles', 'collection', array(
@@ -253,7 +253,7 @@ If forms are built in controller directly using `createFormBuilder`:
 
 $form = $this->createFormBuilder($post)
     // ...
-    ->add('uploader', 'gus_uploader', array(
+    ->add('uploader', new UploaderType('mediaFiles'), array(
         'mapped' => false
     ))
     ->add('mediaFiles', 'collection', array(
@@ -269,6 +269,8 @@ $form = $this->createFormBuilder($post)
     // ...
     ->getForm();
 ```
+Notice that `UploaderType` form type class needs the relation between `Post` and `Media`
+
 ## TODO
 * composer require, doctrine bundle 1.3, symfony framework, twig
 * tests
