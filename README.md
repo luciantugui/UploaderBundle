@@ -14,9 +14,10 @@ The bundle is based on [jQuery File Upload](https://github.com/blueimp/jQuery-Fi
 
 ## Installation
 1. install bundle using [Composer](https://getcomposer.org)
-2. enable bundle in `app/AppKernel.php`
-3. configure bundle in `app/config/config.yml`
-4. create `Media` entity class
+2. install and require bundle dependencies
+3. enable bundle in `app/AppKernel.php`
+4. configure bundle in `app/config/config.yml`
+5. create `Media` entity class
 
 ### Step 1: Install Uploader Bundle using [Composer](https://getcomposer.org)
 ``` bash
@@ -24,7 +25,89 @@ composer require luciantugui/uploader-bundle:dev-master
 ```
 Uploader Bundle will be installed in `vendor/luciantugui` directory
 
-### Step 2: Enable UploaderBundle in `AppKernel.php`
+### Step2: Install Uploader Bundle dependencies from GitHub
+Since the bundle is based on [jQuery File Upload](https://github.com/blueimp/jQuery-File-Upload)
+which is not available as a composer package, all dependencies must be installed manually
+configuring custom [composer package repositories](https://getcomposer.org/doc/05-repositories.md#package-2) in `composer.json`:
+ ``` json
+ "repositories": [
+     {
+         "type": "package",
+         "package": {
+             "name": "blueimp/javascript-templates",
+             "version": "master",
+             "source": {
+                 "url": "https://github.com/blueimp/JavaScript-Templates.git",
+                 "type": "git",
+                 "reference": "master"
+             }
+         }
+     },
+     {
+         "type": "package",
+         "package": {
+             "name": "blueimp/javascript-load-image",
+             "version": "master",
+             "source": {
+                 "url": "https://github.com/blueimp/JavaScript-Load-Image.git",
+                 "type": "git",
+                 "reference": "master"
+             }
+         }
+     },
+     {
+         "type": "package",
+         "package": {
+             "name": "blueimp/javascript-canvas-to-blob",
+             "version": "master",
+             "source": {
+                 "url": "https://github.com/blueimp/JavaScript-Canvas-to-Blob.git",
+                 "type": "git",
+                 "reference": "master"
+             }
+         }
+     },
+     {
+         "type": "package",
+         "package": {
+             "name": "blueimp/gallery",
+             "version": "master",
+             "source": {
+                 "url": "https://github.com/blueimp/Gallery.git",
+                 "type": "git",
+                 "reference": "master"
+             }
+         }
+     },
+     {
+         "type": "package",
+         "package": {
+             "name": "blueimp/jquery-file-upload",
+             "version": "master",
+             "source": {
+                 "url": "https://github.com/blueimp/jQuery-File-Upload.git",
+                 "type": "git",
+                 "reference": "master"
+             },
+             "autoload": {
+                 "classmap": ["server/php/"]
+             }
+         }
+     }
+ ]
+ ```
+ Add the previous package to the require section in `composer.json`:
+ ``` json
+ "require": {
+     "blueimp/jquery-file-upload": "dev-master",
+     "blueimp/javascript-templates": "dev-master",
+     "blueimp/javascript-load-image": "dev-master",
+     "blueimp/javascript-canvas-to-blob": "dev-master",
+     "blueimp/gallery": "dev-master"
+}
+ ```
+
+### Step 3: Enable UploaderBundle in `AppKernel.php`
 ``` php
 <?php
 // app/AppKernel.php
@@ -33,7 +116,7 @@ $bundles = array(
     new Gus\UploaderBundle\GusUploaderBundle(),
 );
 ```
-### Step 3: configure UploadBundle in `config.yml`
+### Step 4: configure UploadBundle in `config.yml`
 ``` yml
 # app/config/config.yml
 gus_uploader:
@@ -74,7 +157,8 @@ Bundle configuration `media_class` specifies the doctrine entity class which wil
 `uploads_dir` configures the directory where the files will be uploaded
 and `settings` holds configuration options for the [UploadHandler](https://github.com/blueimp/jQuery-File-Upload/blob/master/server/php/UploadHandler.php)
 
-### Step 4:
+### Step 5: create your `Media` class extending `BaseMedia`
+`Media` entity class facilitates uploads persistence to the database.
 Having a bundle `/src/AppBundle` and using `yaml` for Doctrine configuration,
 add `Media.orm.yml` entity configuration and `Media.php` class as follows:
 ``` yml
@@ -116,10 +200,19 @@ class Media extends BaseMedia
 *
 
 ## TODO
-* composer dependencies, doctrine bundle 1.3, symfony framework, twig
+* composer require, doctrine bundle 1.3, symfony framework, twig
 * tests
 * documentation for doctrine configuration using php annotations (and xml, not only yaml)
 * documentation for php form themes, not only twig
+* migrate composer bundle dependencies from
+[composer package repositories](https://getcomposer.org/doc/05-repositories.md#package-2)
+ to [composer vcs repositories](https://getcomposer.org/doc/05-repositories.md#vcs),
+for this all blueimp libraries needed must be forked, so that a composer.json can be added
+> **Note**: This repository type has a few limitations and should be avoided whenever possible:
+  Composer will not update the package unless you change the version field.
+  Composer will not update the commit references,
+  so if you use master as reference you will have to delete the package to force an update,
+  and will have to deal with an unstable lock file.
 
 ## License
 Released under the [MIT license](http://opensource.org/licenses/MIT).
