@@ -215,7 +215,8 @@ The reason for this is the following note from [composer package repositories](h
  Composer will not update the commit references,
  so if you use master as reference you will have to delete the package to force an update,
  and will have to deal with an unstable lock file.
-* ...
+* fix twitter bootstrap dependency, it might have been already included,
+should be removed from bundle static `assets.html.twig`
 
 ## License
 Released under the [MIT license](http://opensource.org/licenses/MIT).
