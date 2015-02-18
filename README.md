@@ -1,7 +1,7 @@
 # Uploader Bundle
 
-## Under development
-This bundle and the documentation are still under development
+**Warning:**
+> This bundle and the documentation are still under development!
 
 ## Description
 File Upload with multiple file selection, drag&drop support, progress bars, validation and preview images, audio and video.
@@ -24,7 +24,7 @@ composer require luciantugui/uploader-bundle:dev-master
 ```
 Uploader Bundle will be installed in `vendor/luciantugui` directory
 
-### Step 2: Enable UploaderBundle in `app/AppKernel.php`
+### Step 2: Enable UploaderBundle in `AppKernel.php`
 ``` php
 <?php
 // app/AppKernel.php
@@ -33,8 +33,9 @@ $bundles = array(
     new Gus\UploaderBundle\GusUploaderBundle(),
 );
 ```
-### Step 3: configure UploadBundle in `app/config/config.yml`
+### Step 3: configure UploadBundle in `config.yml`
 ``` yml
+# app/config/config.yml
 gus_uploader:
     media_class: Bike\ProductBundle\Entity\Media
     uploads_dir: 'uploaded/'
@@ -93,17 +94,13 @@ AppBundle\Entity\Media:
 ```
 ``` php
 <?php
-//src/AppBundle/Entity/Media.php
+// src/AppBundle/Entity/Media.php
 
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gus\UploaderBundle\Entity\BaseMedia;
 
-/**
- * Class Media
- * @package AppBundle\Entity
- */
 class Media extends BaseMedia
 {
     public function __construct()
