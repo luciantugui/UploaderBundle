@@ -1,7 +1,7 @@
 {
     "name": "luciantugui/uploader-bundle",
     "type": "symfony-bundle",
-    "description": "blueimp's jquery file upload",
+    "description": "Symfony Uploader Bundle based on blueimp jquery file upload",
     "keywords": ["symfony","upload","uploader"],
     "homepage": "https://github.com/luciantugui/UploaderBundle",
     "license": "MIT",
