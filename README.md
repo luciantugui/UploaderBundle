@@ -15,8 +15,8 @@ The bundle is based on [jQuery File Upload](https://github.com/blueimp/jQuery-Fi
 ## Installation
 1. install bundle using [Composer](https://getcomposer.org)
 2. install and require bundle dependencies
-3. enable bundle in `app/AppKernel.php`
-4. configure bundle in `app/config/config.yml`
+3. configure bundle in `app/config/config.yml`
+4. enable bundle in `app/AppKernel.php`
 5. create `Media` entity class
 
 ### Step 1: Install Uploader Bundle using [Composer](https://getcomposer.org)
@@ -107,16 +107,7 @@ configuring custom [composer package repositories](https://getcomposer.org/doc/0
 }
  ```
 
-### Step 3: Enable UploaderBundle in `AppKernel.php`
-``` php
-<?php
-// app/AppKernel.php
-$bundles = array(
-    // ...
-    new Gus\UploaderBundle\GusUploaderBundle(),
-);
-```
-### Step 4: configure UploadBundle in `config.yml`
+### Step 3: configure UploadBundle in `config.yml`
 ``` yml
 # app/config/config.yml
 gus_uploader:
@@ -156,6 +147,16 @@ gus_uploader:
 Bundle configuration `media_class` specifies the doctrine entity class which will store the media files (described in the next step),
 `uploads_dir` configures the directory where the files will be uploaded
 and `settings` holds configuration options for the [UploadHandler](https://github.com/blueimp/jQuery-File-Upload/blob/master/server/php/UploadHandler.php)
+
+### Step 4: Enable UploaderBundle in `AppKernel.php`
+``` php
+<?php
+// app/AppKernel.php
+$bundles = array(
+    // ...
+    new Gus\UploaderBundle\GusUploaderBundle(),
+);
+```
 
 ### Step 5: create your `Media` class extending `BaseMedia`
 `Media` entity class facilitates uploads persistence to the database.
